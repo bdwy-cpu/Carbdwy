@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>טופס ביטוח חובה</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>יצירת טופס ביטוח חובה</h1>
+    <form id="insuranceForm">
+        <label>מס׳ פוליסה: <input type="text" name="policy_number" required></label>
+        <label>מס׳ רישוי: <input type="text" name="license_number" required></label>
+        <label>שם בעל הפוליסה: <input type="text" name="policy_holder_name" required></label>
+        <label>מס זהות: <input type="text" name="id_number" required></label>
+        <label>מס שילדה: <input type="text" name="chassis_number" required></label>
+        <label>סוג רכב לצורך ביטוחו: <input type="text" name="vehicle_type" required></label>
+        <label>שם היצרן והדגם: <input type="text" name="manufacturer_model" required></label>
+        <label>נפח מנוע: <input type="text" name="engine_volume" required></label>
+        <label>שנת ייצור: <input type="text" name="manufacture_year" required></label>
+        <label>מס נוסעים: <input type="text" name="passenger_count" required></label>
+        <label>סוג הרכב בהתאם לרישיון: <input type="text" name="vehicle_class" required></label>
+        <label>תאריך תחילה: <input type="date" name="insurance_start" required></label>
+        <label>תאריך סיום: <input type="date" name="insurance_end" required></label>
+        <label>שעה: <input type="time" name="insurance_hour" required></label>
+        <label>מחיר הביטוח: <input type="text" name="insurance_price" required></label>
+        <button type="submit">צור PDF</button>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>
