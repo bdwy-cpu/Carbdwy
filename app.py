@@ -1,15 +1,13 @@
-
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, send_from_directory, jsonify
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from PyPDF2 import PdfReader, PdfWriter
-
 import io
 import datetime
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', static_url_path='')
 
-# Field positions matching the original template
 field_positions = {
     "policy_number": (100, 730),
     "license_number": (100, 710),
@@ -28,11 +26,14 @@ field_positions = {
     "insurance_price": (100, 450)
 }
 
+@app.route('/')
+def serve_index():
+    return send_from_directory('.', 'index.html')
+
 @app.route('/generate-pdf', methods=['POST'])
 def generate_pdf():
     data = request.json
 
-    # Create a PDF overlay in memory
     packet = io.BytesIO()
     c = canvas.Canvas(packet, pagesize=A4)
 
@@ -43,17 +44,14 @@ def generate_pdf():
     c.save()
     packet.seek(0)
 
-    # Read overlay and original template
     overlay_pdf = PdfReader(packet)
     template_pdf = PdfReader("אסססססעד.pdf")
     writer = PdfWriter()
 
-    # Merge the overlay with the first page
     base_page = template_pdf.pages[0]
     base_page.merge_page(overlay_pdf.pages[0])
     writer.add_page(base_page)
 
-    # Save final PDF to memory
     output_stream = io.BytesIO()
     writer.write(output_stream)
     output_stream.seek(0)
@@ -62,4 +60,4 @@ def generate_pdf():
     return send_file(output_stream, as_attachment=True, download_name=filename, mimetype='application/pdf')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
