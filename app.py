@@ -1,10 +1,10 @@
-from flask import Flask, request, send_file, send_from_directory, jsonify
+
+from flask import Flask, request, send_file, send_from_directory
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from PyPDF2 import PdfReader, PdfWriter
 import io
 import datetime
-import os
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
@@ -45,7 +45,7 @@ def generate_pdf():
     packet.seek(0)
 
     overlay_pdf = PdfReader(packet)
-    template_pdf = PdfReader("אסססססעד.pdf")
+    template_pdf = PdfReader("template.pdf")
     writer = PdfWriter()
 
     base_page = template_pdf.pages[0]
