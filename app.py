@@ -45,7 +45,9 @@ def generate_pdf():
     packet.seek(0)
 
     overlay_pdf = PdfReader(packet)
-    template_path = os.path.join(os.path.dirname(__file__), "template.pdf")
+    import os  # אם לא כתוב למעלה
+
+template_path = os.path.join(os.path.dirname(__file__), "template.pdf")
 template_pdf = PdfReader(template_path)
     writer = PdfWriter()
 
